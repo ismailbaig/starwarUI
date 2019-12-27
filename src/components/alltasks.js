@@ -36,22 +36,32 @@ export default class alltasks extends Component{
                         axios.get('http://localhost:4000/task1')
                         .then(res => {
                             this.setState({longestCrawlMovie : res.data, task1loadmsg: ''});
+                        }).catch(err => {
+                            this.setState({longestCrawlMovie : 'Error: Check Console OR Contact Admin', task1loadmsg: ''});
+                            console.log('Error occured while loading Task1 api ', err);
                         })
 
                         axios.get('http://localhost:4000/task2')
                         .then(res => {
                             this.setState({personsMostMovies : res.data[0].name, task2loadmsg: ''});
+                        }).catch(err => {
+                            this.setState({personsMostMovies : 'Error: Check Console OR Contact Admin', task2loadmsg: ''});
+                            console.log('Error occured while loading Task2 api ', err);
                         })
 
                         axios.get('http://localhost:4000/task3')
                         .then(res => {
                             this.setState({species : res.data, task3loadmsg: ''});
+                        }).catch(err => {
+                            this.setState({personsMostMovies : 'Error: Check Console OR Contact Admin', task3loadmsg: ''});
+                            console.log('Error occured while loading Task3 api ', err);
                         })
 
-                       
                     } else {
                         alert('Invalid User')
                     }
+                }).catch(err => {
+                    console.log('Error occured while Loggin in : ', err);
                 });
             }
     }
