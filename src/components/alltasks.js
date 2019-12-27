@@ -11,7 +11,8 @@ export default class alltasks extends Component{
             personsMostMovies: '', task2loadmsg: 'loding',
             species: [], task3loadmsg: 'loding',
             toggleContentInfo: false,
-            isValidUser: false
+            isValidUser: false,
+            baseurl: 'http://localhost:4000'
         };
 
         this.getAllTasks= this.getAllTasks.bind(this);
@@ -30,10 +31,10 @@ export default class alltasks extends Component{
             });
 
             if(!this.state.toggleContentInfo){
-                axios.post('http://localhost:4000/login', {"userid": '11', "pwd":"11"}).then(res => {
+                axios.post(this.state.baseurl + '/login', {"userid": '11', "pwd":"11"}).then(res => {
                     this.setState({isValidUser: res.data});
                     if (this.state.isValidUser)  {
-                        axios.get('http://localhost:4000/task1')
+                        axios.get(this.state.baseurl + '/task1')
                         .then(res => {
                             this.setState({longestCrawlMovie : res.data, task1loadmsg: ''});
                         }).catch(err => {
@@ -41,7 +42,7 @@ export default class alltasks extends Component{
                             console.log('Error occured while loading Task1 api ', err);
                         })
 
-                        axios.get('http://localhost:4000/task2')
+                        axios.get(this.state.baseurl + '/task2')
                         .then(res => {
                             this.setState({personsMostMovies : res.data[0].name, task2loadmsg: ''});
                         }).catch(err => {
@@ -49,7 +50,7 @@ export default class alltasks extends Component{
                             console.log('Error occured while loading Task2 api ', err);
                         })
 
-                        axios.get('http://localhost:4000/task3')
+                        axios.get(this.state.baseurl + '/task3')
                         .then(res => {
                             this.setState({species : res.data, task3loadmsg: ''});
                         }).catch(err => {
