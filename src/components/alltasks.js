@@ -18,7 +18,7 @@ export default class alltasks extends Component{
 
     getAllTasks(e) {
 
-        const { task1loadmsg, task2loadmsg, task3loadmsg} = this.state;
+        const { task1loadmsg} = this.state;
 
         this.setState(
             {
