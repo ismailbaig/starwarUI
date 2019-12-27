@@ -1,0 +1,36 @@
+body{
+  background: #000;
+  text-align: center;
+}
+
+.logo{
+  margin: 20px auto;
+  width: 55%;
+}
+
+.btn{
+  margin: 30px auto;
+  width: 100%;
+}
+
+.btn-yellow{
+  background: yellow;
+  width: 100%;
+  color: #000;
+  display: block;
+  padding: 45px;
+  border-radius: 5px;
+  font-size: 2em;
+}
+
+.text{
+  font-size: 2em;
+  color: yellow;
+}
+
+.text-white{
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 5px 10px;
+}
