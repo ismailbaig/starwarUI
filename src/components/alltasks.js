@@ -9,6 +9,7 @@ export default class alltasks extends Component{
         this.state= {
             longestCrawlMovie: '', task1loadmsg: 'loding',
             personsMostMovies: '', task2loadmsg: 'loding',
+            species: [], task3loadmsg: 'loding',
             toggleContentInfo: false,
             isValidUser: false
         };
@@ -17,13 +18,14 @@ export default class alltasks extends Component{
     }
 
     getAllTasks(e) {
-      
-        const { task1loadmsg, task2loadmsg} = this.state;
+
+        const { task1loadmsg, task2loadmsg, task3loadmsg} = this.state;
 
         this.setState(
             {
                 longestCrawlMovie: '', task1loadmsg: 'loading (longest crawl movie info) , please wait!!', 
                 personsMostMovies: '', task2loadmsg: 'loading (person appeared most), please wait!!',
+                species: [], task3loadmsg: 'loading (species appeared most), please wait!!',
                 toggleContentInfo: !this.state.toggleContentInfo
             });
 
@@ -39,6 +41,11 @@ export default class alltasks extends Component{
                         axios.get('http://localhost:4000/task2')
                         .then(res => {
                             this.setState({personsMostMovies : res.data[0].name, task2loadmsg: ''});
+                        })
+
+                        axios.get('http://localhost:4000/task3')
+                        .then(res => {
+                            this.setState({species : res.data, task3loadmsg: ''});
                         })
 
                        
@@ -65,7 +72,15 @@ export default class alltasks extends Component{
                         <p className="text-white"> What character (person) appeared in most of the Star Wars films?<br></br>
                             <div className="text"> {this.state.task2loadmsg}</div>
                             <span className="text">{this.state.personsMostMovies}</span>
-                        </p> 
+                        </p>
+
+                        <p className="text-white">What species appeared in the most number of Star Wars films?</p>
+                            <div className="text"> {this.state.task3loadmsg}</div>
+                            <ul>
+                                <li>{this.state.species.map( (s) => {
+                                    return <div className="text" key ={s.id}>{s.name} ({s.count})</div>
+                                })}</li>
+                            </ul>
                     
                 </div>)}
             </div>
